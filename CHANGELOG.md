@@ -7,6 +7,10 @@ Source development is private; tags that trigger CI live in this repository.
 On each `v*` tag, CI also syncs `README.md`, `README.zh-CN.md`, `CHANGELOG.md`,
 and `LICENSE` to the public `vesaaa/vsterm` main branch.
 
+## [1.1.4] — 2026-07-26
+
+- CI: tag releases upload assets directly to the public Release (skip Actions artifacts; avoids storage-quota failures).
+
 ## [1.1.3] — 2026-07-26
 
 - Cut idle CPU: vsync on real GPUs (WARP still AutoNoVsync); stop tooltip popups from scheduling 60 fps redraws.
