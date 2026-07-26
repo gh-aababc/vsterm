@@ -7,6 +7,12 @@ Source development is private; tags that trigger CI live in this repository.
 On each `v*` tag, CI also syncs `README.md`, `README.zh-CN.md`, `CHANGELOG.md`,
 and `LICENSE` to the public `vesaaa/vsterm` main branch.
 
+## [1.1.3] — 2026-07-26
+
+- Cut idle CPU: vsync on real GPUs (WARP still AutoNoVsync); stop tooltip popups from scheduling 60 fps redraws.
+- macOS Dock / Launchpad icon: 10% transparent margin; runtime Dock glyph uses the same padded asset.
+- macOS releases ship as drag-install DMGs; `tools/` (ip2region) lives inside `VsTerm.app/Contents/Resources`.
+
 ## [1.1.2] — 2026-07-24
 
 - Verify private CI publishes Release assets (and docs) to public `vesaaa/vsterm`.

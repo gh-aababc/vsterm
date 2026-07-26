@@ -71,16 +71,14 @@
 
 ### macOS（无法打开 / 已损坏类提示）
 
-1. 解压对应芯片包：Apple Silicon 用 `vsterm-macos-arm64`，Intel 用 `vsterm-macos-x64`
-2. 若双击提示无法打开或来自未识别开发者：打开 **系统设置 → 隐私与安全性**，在下方找到被拦截的 VsTerm，点 **仍要打开**
-3. 若仍被 Gatekeeper / quarantine 拦住，在终端执行一次清除隔离属性后再打开：
+1. 下载对应芯片的 DMG：Apple Silicon 用 `vsterm-macos-arm64.dmg`，Intel 用 `vsterm-macos-x64.dmg`
+2. 打开 DMG，将 **VsTerm** 拖到 **应用程序**（GeoIP 等运行时数据已打进 `.app`，无需再拷 `tools/`）
+3. 若双击提示无法打开或来自未识别开发者：打开 **系统设置 → 隐私与安全性**，在下方找到被拦截的 VsTerm，点 **仍要打开**
+4. 若仍被 Gatekeeper / quarantine 拦住，在终端执行一次清除隔离属性后再打开：
 
 ```bash
-xattr -cr /path/to/VsTerm
+xattr -cr /Applications/VsTerm.app
 ```
-
-将 `/path/to/VsTerm` 换成实际解压路径。之后即可正常双击启动。
-
 ### Linux
 
 解压后赋予执行权限并运行：

@@ -71,12 +71,13 @@ Or: right-click `VsTerm.exe` → **Properties** → check **Unblock** → OK, th
 
 ### macOS (blocked / damaged)
 
-1. Unpack the matching chip build: Apple Silicon `vsterm-macos-arm64`, Intel `vsterm-macos-x64`
-2. If Gatekeeper blocks it: **System Settings → Privacy &amp; Security** → **Open Anyway**
-3. If quarantine still blocks it:
+1. Download the matching chip DMG: Apple Silicon `vsterm-macos-arm64.dmg`, Intel `vsterm-macos-x64.dmg`
+2. Open the DMG and drag **VsTerm** into **Applications** (runtime data such as GeoIP is inside the `.app` — no separate `tools/` folder)
+3. If Gatekeeper blocks it: **System Settings → Privacy &amp; Security** → **Open Anyway**
+4. If quarantine still blocks it:
 
 ```bash
-xattr -cr /path/to/VsTerm
+xattr -cr /Applications/VsTerm.app
 ```
 
 ### Linux
