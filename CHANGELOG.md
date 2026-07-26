@@ -7,6 +7,10 @@ Source development is private; tags that trigger CI live in this repository.
 On each `v*` tag, CI also syncs `README.md`, `README.zh-CN.md`, `CHANGELOG.md`,
 and `LICENSE` to the public `vesaaa/vsterm` main branch.
 
+## [1.1.5] — 2026-07-26
+
+- CI: run release asset upload with bash on all runners (fixes Windows PowerShell failing on `set -euo pipefail`); bump actions/checkout to v5.
+
 ## [1.1.4] — 2026-07-26
 
 - CI: tag releases upload assets directly to the public Release (skip Actions artifacts; avoids storage-quota failures).
