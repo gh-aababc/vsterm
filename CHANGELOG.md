@@ -8,6 +8,15 @@ On each `v*` tag, CI also syncs `README.md`, `README.zh-CN.md`, `CHANGELOG.md`,
 and `LICENSE` to the public `vesaaa/vsterm` main branch, and copies this file’s
 section for that version into the GitHub Release notes.
 
+## [1.1.7] — 2026-07-27
+
+### Changed
+- Path Trace default target is `8.8.4.4` (was `www.baidu.com`).
+- CI: public `vesaaa/vsterm` Release and docs sync only after **all** platform builds succeed (draft staging; incomplete builds are aborted).
+
+### 中文
+- **改进**：路径追踪默认目标改为 `8.8.4.4`；Release CI 等全部平台构建成功后再公开发布与同步文档，避免缺包。
+
 ## [1.1.6] — 2026-07-26
 
 ### Added
