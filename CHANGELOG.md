@@ -8,6 +8,19 @@ On each `v*` tag, CI also syncs `README.md`, `README.zh-CN.md`, `CHANGELOG.md`,
 and `LICENSE` to the public `vesaaa/vsterm` main branch, and copies this file’s
 section for that version into the GitHub Release notes.
 
+## [1.1.11] — 2026-07-27
+
+### Added
+- Routes panel **diagram** view: hub-and-spoke graph for default/policy routes, Linux TPROXY / mark chains (e.g. fwmark → table → lo → TPROXY port / listener), and LAN gateway + NAT detection from `ip rule` / `iptables` / `ss`/`netstat`/`/proc`.
+- Terminal selection persists across scroll; **Shift+click** extends the selection across scrollback.
+
+### Fixed
+- Terminal: Ctrl+C copy no longer freezes the UI (clipboard write was re-entering the egui input lock).
+
+### 中文
+- **新增**：路由面板「图形」视图（默认/策略路由、TPROXY/mark 链路、局域网网关与 NAT）；终端选区滚动后保留，可用 Shift+点击扩展。
+- **修复**：终端 Ctrl+C 复制不再卡死。
+
 ## [1.1.10] — 2026-07-27
 
 ### Fixed
