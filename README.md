@@ -22,38 +22,66 @@
 
 ## Highlights
 
-### Terminal × SFTP path sync, with elevation
+### What stands out in v1.1.13
 
-The file pane and the shell stay aligned:
+- **Terminal + files stay in one flow**: shell tabs, bottom SFTP pane, sudo/elevated SFTP, and ZMODEM transfers are integrated into the same SSH workflow.
+- **Ops panels are first-class, not side utilities**: routes, connections, path trace, IP quality, system info, and live host metrics are built into the app.
+- **Progress is visible**: both **SFTP** and **ZMODEM (`rz` / `sz`)** transfers expose progress / queue state instead of disappearing into a blocking dialog or a blind background task.
+- **Topology and line-quality tooling is richer than a plain terminal**: routing diagrams, per-hop geo/ASN enrichment, fraud / datacenter / blacklist checks, and connection charts are available without leaving the session.
+- **Native desktop app**: no Electron; Rust + `wgpu`, with software-render fallback for VM / RDP-style environments.
 
-- **Files → terminal**: one-click `cd` into the remote folder you are browsing
-- **Terminal → files**: OSC 7 cwd reporting keeps the file pane following directory changes
-- **sudo / elevated SFTP**: after `sudo -i` / `su` in the terminal, transfers can use the same identity; or elevate with a secure password dialog
-- Real SFTP: list, navigate, file/folder upload &amp; download, progress and queue; drag-and-drop, create / rename / delete
+### Screenshots
 
-### Best of breed, with its own path
+#### Terminal workspace
 
-| Inspired by | In VsTerm |
-|-------------|-----------|
-| **WindTerm** | Command-block fold gutter, timestamps &amp; line numbers, semantic highlighting, deep scrollback |
-| **Termius** | Session tree &amp; folders, portable YAML config, encrypted vault / master password |
-| **FinalShell** | Bottom file manager, host ops toolbox, visual CPU / network / storage monitors |
+<img src="assets/screenshots/overview_terminal.webp" alt="VsTerm terminal overview with session tree, terminal, and bottom pane" />
 
-Also: quick connect (`user@host` / `ssh://…`), multi-tab &amp; reconnect, local shell, ZMODEM (`rz`/`sz`), system monitor and system-info panels.
+#### Route diagram / policy topology
+
+<img src="assets/screenshots/routes_diagram.webp" alt="VsTerm routes diagram with policy topology" />
+
+#### IP quality check
+
+<img src="assets/screenshots/ip_quality.webp" alt="VsTerm IP quality panel with risk, org, location, and blacklist results" />
+
+#### Path trace with geo / ASN enrichment
+
+<img src="assets/screenshots/path_trace_geo.webp" alt="VsTerm path trace showing RTT, loss, org, ASN, location, and coordinates" />
+
+### Feature comparison across mainstream SSH terminal tools
+
+Legend: `✅` built in and surfaced as a first-class workflow, `◐` supported in a narrower / companion-tool / plugin-style way, `✗` not a headline built-in capability in the usual product workflow.
+
+| Capability | VsTerm | WindTerm | Termius | FinalShell | MobaXterm | SecureCRT | Xshell | Tabby |
+|------------|--------|----------|---------|------------|-----------|-----------|--------|-------|
+| Implementation language | Rust | C/C++ | Electron | Java | C++ | C++ | C++ | Electron |
+| Max terminal scrollback lines | 100,000 | unlimited | - | - | 360,000 | 128,000 | ~2.1B | 25,000 |
+| Command-block folding / outline in terminal output | ✅ | ✅ | ✗ | ✗ | ✗ | ✗ | ✗ | ✗ |
+| Integrated SFTP pane / remote file manager | ✅ | ✅ | ✅ | ✅ | ✅ | ◐ | ◐ | ◐ |
+| SFTP transfer progress / queue visibility | ✅ | ◐ | ◐ | ✅ | ◐ | ◐ | ◐ | ◐ |
+| ZMODEM (`rz` / `sz`) built in | ✅ | ✅ | ✗ | ✅ | ◐ | ✅ | ✅ | ✅ |
+| ZMODEM progress surfaced in the app | ✅ | ✅ | ✗ | ◐ | ◐ | ◐ | ◐ | ◐ |
+| Terminal ↔ file-pane path sync | ✅ | ✗ | ◐ | ◐ | ✗ | ✗ | ✗ | ✗ |
+| Elevated SFTP that can follow `sudo -i` / `su` | ✅ | ✗ | ✗ | ✗ | ✗ | ✗ | ✗ | ✗ |
+| Route diagram / policy-routing topology | ✅ | ✗ | ✗ | ✗ | ✗ | ✗ | ✗ | ✗ |
+| Path trace with geo / ASN enrichment | ✅ | ✗ | ✗ | ✗ | ✗ | ✗ | ✗ | ✗ |
+| Built-in IP quality / reputation checks | ✅ | ✗ | ✗ | ✗ | ✗ | ✗ | ✗ | ✗ |
+| CPU / memory / storage graphical monitor | ✅ | ◐ | ✗ | ✅ | ✗ | ✗ | ✗ | ✗ |
+| Connection / socket monitoring panel | ✅ | ✗ | ✗ | ◐ | ✗ | ✗ | ✗ | ✗ |
+| Connect effects / motion polish | ✅ | ✗ | ✗ | ✗ | ✗ | ✗ | ✗ | ✗ |
+| Desk pet | ✅ | ✗ | ✗ | ✗ | ✗ | ✗ | ✗ | ✗ |
+
+Notes:
+
+- The table is intentionally strict: it favors **built-in, documented, end-user-visible workflows** over “possible via shell commands” or “can be scripted externally”.
+- Some commercial tools split file-transfer UX into a companion app or a separate tab, which is why several cells are `◐` instead of `✅`.
+- Scrollback figures use publicly documented defaults / maxima where available (`-` = not clearly documented). VsTerm grows dynamically up to **100,000** lines.
 
 ### Desk pets &amp; connect effects — ops with a pulse
 
 - **Desk pets**: monkey (right edge) / dog (bottom edge), draggable; reacts to typing, Enter, and host connect
 - **Connect effects**: trail inhale / shatter rebuild; tab accent sweep after connect
 - Falls back to a lower frame cadence when no hardware GPU is available (e.g. some RDP / WARP setups)
-
-### Network tools
-
-Built-in ops panels for local and remote hosts:
-
-- **Routes**: full IPv4 / IPv6 tables and `ip rule` policy rules — see multi-WAN / policy routing without guessing
-- **Connections**: TCP / UDP overview; host connection details; router NAT forward sessions with filters
-- **Path trace**: per-hop RTT / loss with ASN, org, location, and coordinates for line quality checks
 
 ## First run
 
